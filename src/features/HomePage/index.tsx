@@ -3,6 +3,7 @@ import { Container } from './styles';
 import { Header } from '@/components/layout/Header/Header';
 import { MainContainer } from '@/components/layout/MainContainer';
 import { PostCard } from '@/components/PostCard';
+import { Footer } from '@/components/layout/Footer/Footer';
 
 export type HomeProps = {
   posts: PostData[];
@@ -24,6 +25,7 @@ export default async function HomePage({ posts }: HomeProps) {
           ))}
         </Container>
       </MainContainer>
+      <Footer />
     </>
   );
 }
