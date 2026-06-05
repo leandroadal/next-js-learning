@@ -1,3 +1,8 @@
-export default function Home() {
-  return <h1>oi</h1>;
+import { getAllPosts } from '@/data/posts/get-all';
+import HomePage from '@/features/HomePage';
+
+export default async function Home() {
+  const posts = await getAllPosts();
+
+  return <HomePage posts={posts} />;
 }
