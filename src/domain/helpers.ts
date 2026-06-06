@@ -1,4 +1,4 @@
-import { PostCover } from './posts';
+import { PostAuthor, PostCategory, PostCover } from './posts';
 
 type ImageFormat = 'large' | 'medium' | 'small' | 'thumbnail';
 
@@ -40,4 +40,16 @@ export const getAltText = (cover: PostCover | null) => {
   if (!cover?.alternativeText) return 'Capa da publicação'; // fallback padrão
 
   return cover.alternativeText;
+};
+
+export const getAuthor = (autor: PostAuthor | null) => {
+  if (!autor?.name) return 'Sem nome'; // padrão
+
+  return autor.name;
+};
+
+export const getCategory = (category: PostCategory | null) => {
+  if (!category?.name) return 'Sem categoria'; // padrão
+
+  return category.name;
 };
