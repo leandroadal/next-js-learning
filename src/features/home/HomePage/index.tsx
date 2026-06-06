@@ -2,7 +2,7 @@ import { PostData } from '@/domain/posts';
 import { Container } from './styles';
 import { Header } from '@/components/layout/Header/Header';
 import { MainContainer } from '@/components/layout/MainContainer';
-import { PostCard } from '@/components/PostCard';
+import { PostCard } from '@/features/home/components/PostCard';
 import { Footer } from '@/components/layout/Footer/Footer';
 
 export type HomeProps = {

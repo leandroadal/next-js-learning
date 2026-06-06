@@ -6,7 +6,7 @@ import {
   PostCardHeading,
   PostCardImage,
 } from './styled';
-import { PostCover, PostData } from '@/domain/posts';
+import { PostCover } from '@/domain/posts';
 import { getCoverSize, getCoverUrl } from '@/domain/helpers';
 
 export type PostCardProps = {
@@ -16,7 +16,7 @@ export type PostCardProps = {
 };
 
 export function PostCard({ slug, title, cover }: PostCardProps) {
-  const coverUrl = getCoverUrl(cover);
+  const coverUrl = getCoverUrl(cover, 'large');
   const { width, height } = getCoverSize(cover);
   const postUrl = `/post/${slug}`;
 

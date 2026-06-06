@@ -1,6 +1,7 @@
 import { countAllPosts } from '@/data/posts/count-all posts';
 import { getAllPosts } from '@/data/posts/get-all';
 import { getPost } from '@/data/posts/get-post';
+import PostPage from '@/features/posts/PostPage';
 import { notFound } from 'next/navigation';
 
 // Força que rotas não geradas no build retornem 404 (equivalente ao fallback: false)
@@ -14,25 +15,23 @@ export default async function DynamicPost({ params }: Props) {
   // No Next.js 15+, 'params' é uma Promise e deve ser resolvida com 'await'
   const { slug } = await params;
 
-  if (!slug || typeof slug !== 'string') {
-    notFound();
-  }
+  const posts = await getPost(slug, true);
+  //console.log(posts);
 
-  const posts = await getPost(slug);
   const post = posts[0];
 
   // Caso o post não exista, redireciona para a página 404 padrão
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
-  return <h1>{post.title}</h1>;
+  return <PostPage post={post} />;
 }
 
-// 2. Substitui o 'getStaticPaths'
+// Substitui o 'getStaticPaths'
 export async function generateStaticParams() {
   const numberOfPosts = await countAllPosts();
-  const posts = await getAllPosts(`pagination[pageSize]=${numberOfPosts}`);
+  const posts = await getAllPosts(`pagination[pageSize]=${numberOfPosts}`, {
+    cache: 'force-cache',
+  });
   //console.log(posts);
 
   // Retorna diretamente o array com os parâmetros da rota

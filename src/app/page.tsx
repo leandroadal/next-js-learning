@@ -1,5 +1,5 @@
 import { getAllPosts } from '@/data/posts/get-all';
-import HomePage from '@/features/HomePage';
+import HomePage from '@/features/home/HomePage';
 
 export default async function Home() {
   const posts = await getAllPosts(
