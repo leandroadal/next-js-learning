@@ -18,7 +18,7 @@ export default async function HomePage({ posts }: HomeProps) {
           {posts.map((post) => (
             <PostCard
               key={post.slug}
-              cover={getCoverUrl(post.cover)}
+              cover={post.cover}
               slug={post.slug}
               title={post.title}
             />
@@ -29,16 +29,3 @@ export default async function HomePage({ posts }: HomeProps) {
     </>
   );
 }
-
-const getCoverUrl = (cover: PostData['cover']) => {
-  if (!cover) return '/images/placeholder.jpg';
-
-  const formats = cover.formats;
-  return (
-    formats?.large?.url ||
-    formats?.medium?.url ||
-    formats?.small?.url ||
-    formats?.thumbnail?.url ||
-    cover.url // ← url original, sem resize
-  );
-};
