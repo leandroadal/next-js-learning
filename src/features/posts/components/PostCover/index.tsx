@@ -1,4 +1,5 @@
-import { Container } from './styled';
+import Image from 'next/image';
+import { ImageWrapper } from './styled';
 
 export type PostCoverProps = {
   coverUrl: string;
@@ -6,5 +7,11 @@ export type PostCoverProps = {
 };
 
 export const PostCover = ({ coverUrl, alt }: PostCoverProps) => {
-  return <Container src={coverUrl} alt={alt} />;
+  return (
+    <>
+      <ImageWrapper>
+        <Image src={coverUrl} alt={alt} fill style={{ objectFit: 'contain' }} />
+      </ImageWrapper>
+    </>
+  );
 };

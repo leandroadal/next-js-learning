@@ -2,11 +2,12 @@
 
 import styled, { css } from 'styled-components';
 
-export const Container = styled.img`
+export const ImageWrapper = styled.div`
   ${({ theme }) => css`
-    display: block;       /* volta ao comportamento padrão */
-    max-width: 100%;      /* mantém responsiva */
-    margin: 0 auto 2rem;
+    position: relative;
+    max-width: 100%;
+    width: 100%;
+    height: 50vh; /* ou qualquer altura desejada */
     margin-bottom: ${theme.spacings.medium};
   `}
 `;
