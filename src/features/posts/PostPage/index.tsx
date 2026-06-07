@@ -14,6 +14,9 @@ import { PostDetails } from '../components/PostDetails';
 import { formatDate } from '@/utils/format-data';
 import { MainContainer } from '@/components/layout/MainContainer';
 import { Comments } from '@/components/ ui/comments';
+import Head from 'next/head';
+import { SITE_NAME } from '@/config/app-config';
+import { removeHtml } from '@/utils/remove-html';
 
 export type PostPageProps = {
   post: PostData;
@@ -28,6 +31,14 @@ export default function PostPage({ post }: PostPageProps) {
 
   return (
     <>
+      <Head>
+        <title>{`${post.title} - ${SITE_NAME}`}</title>
+        <meta
+          name="description"
+          content={removeHtml(post.content).slice(0, 150)}
+        />
+      </Head>
+
       <Header />
 
       <MainContainer>
