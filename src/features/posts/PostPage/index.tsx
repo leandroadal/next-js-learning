@@ -13,6 +13,7 @@ import {
 import { PostDetails } from '../components/PostDetails';
 import { formatDate } from '@/utils/format-data';
 import { MainContainer } from '@/components/layout/MainContainer';
+import { Comments } from '@/components/ ui/comments';
 
 export type PostPageProps = {
   post: PostData;
@@ -34,6 +35,7 @@ export default function PostPage({ post }: PostPageProps) {
         <PostDetails author={author} category={category} date={createdAt} />
         <PostCover coverUrl={coverUrl} alt={altText} />
         <PostContent content={post.content} />
+        <Comments title={post.title} slug={post.slug} />
       </MainContainer>
 
       <Footer />
