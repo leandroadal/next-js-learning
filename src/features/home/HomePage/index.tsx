@@ -1,5 +1,5 @@
 import { PostData } from '@/domain/posts';
-import { Container } from './styles';
+import { Category, Container } from './styles';
 import { Header } from '@/components/layout/Header/Header';
 import { MainContainer } from '@/components/layout/MainContainer';
 import { PostCard } from '@/features/home/components/PostCard';
@@ -20,6 +20,10 @@ export default async function HomePage({ posts, category }: HomeProps) {
         <meta name="description" content="Este é meu blog de tecnologia." />
       </Head>
       <Header />
+
+      {/* Aparece so quando for usando o filtro por categoria */}
+      {category && <Category>Categoria: {category}</Category>}
+
       <MainContainer>
         <Container>
           {posts.map((post) => (
