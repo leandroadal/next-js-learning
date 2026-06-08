@@ -6,18 +6,26 @@ import { PostCard } from '@/features/home/components/PostCard';
 import { Footer } from '@/components/layout/Footer/Footer';
 import { SITE_NAME } from '@/config/app-config';
 import Head from 'next/head';
+import { PaginationData } from '@/domain/pagination';
 import Link from 'next/link';
+import { Pagination } from '@/features/posts/PaginationPage/components/Pagination';
 
 export type HomeProps = {
   posts: PostData[];
   category?: string;
+  pagination: PaginationData;
 };
 
-export default async function HomePage({ posts, category }: HomeProps) {
+export default async function PaginationPage({
+  posts,
+  category,
+  pagination,
+}: HomeProps) {
   return (
     <>
       <Head>
         <title>{category ? `${category} - ${SITE_NAME}` : SITE_NAME}</title>
+        {pagination?.nextPage && ` - Página ${pagination.nextPage - 1}`}
         <meta name="description" content="Este é meu blog de tecnologia." />
       </Head>
       <Header />
@@ -36,11 +44,12 @@ export default async function HomePage({ posts, category }: HomeProps) {
             />
           ))}
         </Container>
-        {
+        <Pagination {...pagination} />
+        {!pagination?.nextPage && (
           <Link href="/post/page/[...param]" as="/post/page/1" passHref>
             <AllPostsLinks>Ver todos os posts</AllPostsLinks>
           </Link>
-        }
+        )}
       </MainContainer>
       <Footer />
     </>
