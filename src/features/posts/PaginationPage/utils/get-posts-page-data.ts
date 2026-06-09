@@ -3,13 +3,12 @@ import { buildPostsQuery } from './build-posts-query';
 import { countAllPosts } from '@/data/posts/count-all posts';
 import { createPagination } from './create-pagination';
 import { POSTS_PER_PAGE } from '@/domain/constants';
-
-type FetchCache = 'no-store' | 'force-cache';
+import { FetchOptions } from '@/utils/fetch-options';
 
 export async function getPostsPageData(
   page: number,
   category: string,
-  cache: FetchCache,
+  cache: FetchOptions,
 ) {
   const postsPerPage = POSTS_PER_PAGE;
 
@@ -20,7 +19,7 @@ export async function getPostsPageData(
   );
 
   const [posts, numberOfPosts] = await Promise.all([
-    getAllPosts(urlQuery, { cache: cache }),
+    getAllPosts(urlQuery, cache),
     countAllPosts(categoryQuery),
   ]);
 

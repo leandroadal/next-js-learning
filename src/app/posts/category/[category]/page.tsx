@@ -1,3 +1,4 @@
+import { getAllCategories } from '@/data/category/get-all-categories';
 import PaginationPage from '@/features/posts/PaginationPage';
 import { getPostsPageData } from '@/features/posts/PaginationPage/utils/get-posts-page-data';
 
@@ -15,17 +16,27 @@ export default async function PostsByCategoryPage({ params }: PageProps) {
 
   //const urlQuery = `populate=*&sort=id:desc&pagination[start]=0&pagination[limit]=10&filters[category][name][$contains]=${category}`;
 
-  const { posts, pagination } = await getPostsPageData(
-    1,
-    category,
-    'force-cache',
-  );
+  const { posts, pagination } = await getPostsPageData(1, category, {
+    cache: 'force-cache',
+    //revalidate: 3600, // 1h - ou usa um hook de build dependendo do caso
+  });
 
   if (!posts.length) {
     return <div>Página não encontrada...</div>;
   }
 
+  const categories = await getAllCategories({
+    cache: 'force-cache',
+    //revalidate: 86400, // 1 dia
+  });
+  //console.log(categories);
+
   return (
-    <PaginationPage posts={posts} category={category} pagination={pagination} />
+    <PaginationPage
+      posts={posts}
+      category={category}
+      pagination={pagination}
+      categories={categories}
+    />
   );
 }

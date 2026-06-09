@@ -9,17 +9,20 @@ import Head from 'next/head';
 import { PaginationData } from '@/domain/pagination';
 import Link from 'next/link';
 import { Pagination } from '@/features/posts/PaginationPage/components/Pagination';
+import { CategoryData } from '@/domain/category';
 
 export type HomeProps = {
   posts: PostData[];
   category?: string;
   pagination: PaginationData;
+  categories: CategoryData[];
 };
 
 export default async function PaginationPage({
   posts,
   category,
   pagination,
+  categories,
 }: HomeProps) {
   return (
     <>
@@ -44,7 +47,7 @@ export default async function PaginationPage({
             />
           ))}
         </Container>
-        <Pagination {...pagination} />
+        <Pagination {...pagination} categories={categories} />
         {!pagination?.nextPage && (
           <Link href="/post/page/[...param]" as="/post/page/1" passHref>
             <AllPostsLinks>Ver todos os posts</AllPostsLinks>

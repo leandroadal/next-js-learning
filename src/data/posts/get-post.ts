@@ -12,8 +12,6 @@ export const getPost = async (
   const response = await fetchJson<PostsResponse>(url, {
     cache: process.env.NODE_ENV === 'development' ? 'no-store' : 'force-cache', // estático
   });
-  //console.log(response);
-  //console.log(process.env.NODE_ENV);
 
   return response.data;
 };

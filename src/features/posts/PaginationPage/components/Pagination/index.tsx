@@ -3,26 +3,35 @@ import Link from 'next/link';
 import { Container, NextLink, PreviousLink } from './styled';
 import { PaginationData } from '@/domain/pagination';
 import { getPaginationViewModel } from './utils/get-pagination-view-model';
+import { CategoryData } from '@/domain/category';
+import { CategorySelector } from '../CategorySelector';
 
-type PaginationProps = PaginationData;
+type PaginationProps = PaginationData & {
+  categories: CategoryData[];
+};
 
 export function Pagination(props: PaginationProps) {
-  const { nextLink, previousLink, hasNextPage, hasPreviousPage } =
-    getPaginationViewModel(props);
+  const {
+    categories,
+    nextLink,
+    previousLink,
+    categoryName,
+    hasNextPage,
+    hasPreviousPage,
+  } = getPaginationViewModel(props, props.categories);
 
   return (
     <Container>
-      {hasPreviousPage && (
-        <PreviousLink>
-          <Link href={previousLink}>Previous</Link>
-        </PreviousLink>
-      )}
+      <PreviousLink>
+        {hasPreviousPage && <Link href={previousLink}>Previous</Link>}
+      </PreviousLink>
 
-      {hasNextPage && (
-        <NextLink>
-          <Link href={nextLink}>Next</Link>
-        </NextLink>
-      )}
+      <CategorySelector
+        categories={categories}
+        selectedCategory={categoryName}
+      />
+
+      <NextLink>{hasNextPage && <Link href={nextLink}>Next</Link>}</NextLink>
     </Container>
   );
 }

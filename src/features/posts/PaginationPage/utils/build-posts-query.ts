@@ -6,7 +6,7 @@ export function buildPostsQuery(
   const startFrom = (page - 1) * postsPerPage;
 
   const categoryQuery = category
-    ? `&filters[category][name][$containsi]=${category}`
+    ? `&filters[category][name][$contains]=${category}`
     : '';
 
   return {

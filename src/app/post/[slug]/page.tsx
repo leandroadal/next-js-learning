@@ -15,6 +15,9 @@ export default async function DynamicPost({ params }: Props) {
   // No Next.js 15+, 'params' é uma Promise e deve ser resolvida com 'await'
   const { slug } = await params;
 
+  // Aqui fora do generateStaticParams()
+  // Se fosse passado cache: 'no-store' explicitamente para o fetch o nest
+  // Não iria renderizar uma Static page
   const posts = await getPost(slug, true);
   //console.log(posts);
 

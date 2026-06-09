@@ -8,8 +8,6 @@ type CountResponse = {
 export const countAllPosts = async (query = '') => {
   const url = `${POSTS_URL}/count?${query}`;
   const numberOfPosts = await fetchJson<CountResponse>(url);
-  console.log(numberOfPosts.total);
-  //console.log(process.env.NODE_ENV);
 
   return numberOfPosts.total;
 };
