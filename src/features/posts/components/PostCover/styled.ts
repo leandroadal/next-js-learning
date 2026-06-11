@@ -7,7 +7,7 @@ export const ImageWrapper = styled.div`
     position: relative;
     max-width: 100%;
     width: 100%;
-    height: 50vh; /* ou qualquer altura desejada */
+    height: 50vh;
     margin-bottom: ${theme.spacings.medium};
   `}
 `;

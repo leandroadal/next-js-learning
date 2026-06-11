@@ -1,7 +1,6 @@
 'use client'; // Precisa ja que esta chamando o theme
 
 import styled, { css } from 'styled-components';
-import Image from 'next/image';
 
 export const Container = styled.div`
   transition: opacity 300ms ease-in-out;
@@ -12,14 +11,19 @@ export const Container = styled.div`
 `;
 
 export const PostCardCover = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacings.small};
-`;
+  ${({ theme }) => css`
+    position: relative;
+    max-width: 100%;
+    height: 30vh;
+    margin-bottom: ${theme.spacings.small};
+  `}
 
-// estiliza o componente Image diretamente
-export const PostCardImage = styled(Image)`
-  width: 100%;
-  height: auto;
-  display: block;
+  a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const PostCardHeading = styled.h2`
