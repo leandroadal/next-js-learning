@@ -3,7 +3,7 @@ import HomePage from '@/features/home/HomePage';
 
 export default async function Home() {
   const posts = await getAllPosts(
-    'populate=*&sort=id:desc&pagination[start]=0&pagination[limit]=10',
+    'populate=*&sort=id:desc&pagination[start]=0&pagination[limit]=9',
     { cache: 'force-cache' }, // Salva em cache por tempo indeterminado
   );
 
